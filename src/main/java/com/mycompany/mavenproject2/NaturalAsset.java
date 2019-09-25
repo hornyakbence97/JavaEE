@@ -27,4 +27,5 @@ class NaturalAsset {
     public void setDescription(String description) {
         this.description = description;
     }
+    //test2
 }
