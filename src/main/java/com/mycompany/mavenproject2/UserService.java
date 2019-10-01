@@ -1,7 +1,12 @@
 package com.mycompany.mavenproject2;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class UserService {
-    private UserRepository uRepo = new UserRepository();
+    @Inject
+    private UserRepository uRepo;
     
     public boolean isExists(String pUserName){
         for(User user:uRepo.getAll())
