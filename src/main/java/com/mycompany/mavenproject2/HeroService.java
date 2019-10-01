@@ -1,5 +1,8 @@
 package com.mycompany.mavenproject2;
 
+import javax.inject.Singleton;
+
+@Singleton
 public class HeroService {
 
     public boolean isValid(Hero pHero){

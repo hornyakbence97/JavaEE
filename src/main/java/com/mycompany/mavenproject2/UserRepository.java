@@ -2,7 +2,9 @@ package com.mycompany.mavenproject2;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Singleton;
 
+@Singleton
 public class UserRepository {
     private static List<User> users = new ArrayList<>();
     static{

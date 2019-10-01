@@ -2,12 +2,12 @@ package com.mycompany.mavenproject2;
 
 public class Hibryd {
     private Species species;
-    private byte percent;
+    private Integer percent;
 
     public Hibryd() {
     }
 
-    public Hibryd(Species species, byte percent) {
+    public Hibryd(Species species, Integer percent) {
         this.species = species;
         this.percent = percent;
     }
@@ -20,11 +20,11 @@ public class Hibryd {
         this.species = species;
     }
 
-    public byte getPercent() {
+    public Integer getPercent() {
         return percent;
     }
 
-    public void setPercent(byte percent) {
+    public void setPercent(Integer percent) {
         this.percent = percent;
     }
     

@@ -2,6 +2,7 @@ package com.mycompany.mavenproject2;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "RegServlet", urlPatterns = {"/reg"})
 public class RegServlet extends HttpServlet {
-        UserRepository uRepo = new UserRepository();
-        UserService uService = new UserService();
+    @Inject    
+    UserRepository uRepo;
+    @Inject
+    UserService uService;
+    @Inject
+    SpeciesRepository speciesRepo;
 
    
 
@@ -27,20 +32,19 @@ public class RegServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
+        User reg;
         PrintWriter out = response.getWriter();
         if (uService.isExists(request.getParameter("name"))) {
             out.print("User name exists!");
         } else {
-            User reg = new User(request.getParameter("name"), request.getParameter("password"));
+            reg = new User(request.getParameter("name"), request.getParameter("password"));
             uRepo.add(reg);
+            
+            response.setContentType("text/html;charset=UTF-8");
+             request.setAttribute("species",speciesRepo.getAll());
+            request.getSession().setAttribute("user", uRepo.getByName(reg.getName()) );
+            getServletContext().getRequestDispatcher("/mainPage.jsp").include(request, response);
         }
-
-        response.setContentType("text/html;charset=UTF-8");
-        for (User user : uRepo.getAll()) {
-            out.print(user.getName().concat("<br>"));
-        }
-
     }
 
     /**
