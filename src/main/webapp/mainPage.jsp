@@ -31,10 +31,10 @@
           <c:forEach var="hero" items="${sessionScope['user'].getHeroes()}">
             <tr>
               <td>
-                <c:out default="" value="${hero.name}"> </c:out>
+                <c:out default="" value="${hero.name}"></c:out>
               </td>
-              <td><a href="heroUpdate?id=<c:out default="" value=" ${hero.name}"> </c:out>">Update</a></td>
-              <td><a href="heroDelete?id=<c:out default="" value=" ${hero.name}"> </c:out>">Delete</a></td>
+              <td><a href="heroUpdate?id=<c:out default="" value="${hero.name}"> </c:out>">Update</a></td>
+              <td><a href="heroDelete?id=<c:out default="" value="${hero.name}"> </c:out>">Delete</a></td>
             </tr>
 
           </c:forEach>
