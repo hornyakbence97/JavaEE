@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Singleton;
 
-@Singleton
 public class UserRepository {
-    private static List<User> users = new ArrayList<>();
-    static{
-        users.add(new User("qw", "qw"));
-    }
+    private List<User> users = new ArrayList<>();
     
     public void add(User pUser){this.users.add(pUser);}
     

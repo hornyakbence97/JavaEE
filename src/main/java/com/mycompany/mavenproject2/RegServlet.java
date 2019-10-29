@@ -34,7 +34,7 @@ public class RegServlet extends HttpServlet {
 
         User reg;
         PrintWriter out = response.getWriter();
-        if (uService.isExists(request.getParameter("name"))) {
+        if (uService.isExists(request.getParameter("name"), uRepo)) {
             out.print("User name exists!");
         } else {
             reg = new User(request.getParameter("name"), request.getParameter("password"));
