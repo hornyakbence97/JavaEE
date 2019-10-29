@@ -3,6 +3,7 @@ package com.mycompany.mavenproject2;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,28 +20,38 @@ public class CreateHeroServlet extends HttpServlet {
     HeroService heroService;
     @Inject
     SpeciesRepository speciesRepository;
+    @Inject
+    HeroRepository heroRepo;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         Hero hero = new Hero();
+        
         hero.setName(request.getParameter("name"));
         hero.setDescription(request.getParameter("description"));
         
+        heroRepo.add(hero);
+        
+        List<Hibryd> v = hero.getHibryds();
         for (Species specie : speciesRepository.getAll()) {
             String tmpName = request.getParameter("specie_" + specie.getId());
             Integer tmpPercentage = Integer.parseInt(request.getParameter("specie_" + specie.getId()));
             
             if (tmpPercentage > 0)
             {
-                hero.getHibryds().add(new Hibryd(specie, tmpPercentage));
+                v.add(new Hibryd(specie, tmpPercentage));
             }
         }
+        
+        hero.setHibryds(v);
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
                 if (heroService.isValid(hero)) {
+                    heroRepo.add(hero);
             ((User) request.getSession().getAttribute("user")).getHeroes().add(hero);
             request.setAttribute("species", speciesRepository.getAll());
             getServletContext().getRequestDispatcher("/mainPage.jsp").include(request, response);

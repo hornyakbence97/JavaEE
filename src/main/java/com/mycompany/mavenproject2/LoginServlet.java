@@ -2,6 +2,7 @@ package com.mycompany.mavenproject2;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +25,7 @@ public class LoginServlet extends HttpServlet {
                 
         User login = new User(request.getParameter("name"), request.getParameter("password"));
         PrintWriter out = response.getWriter();
-        if(uService.isExists(login)) {
+        if(uService.isExists(login, uRepository)) {
             request.setAttribute("species",sRepository.getAll());
             request.getSession().setAttribute("user", uRepository.getByName(login.getName()) );
             getServletContext().getRequestDispatcher("/mainPage.jsp").include(request, response);
