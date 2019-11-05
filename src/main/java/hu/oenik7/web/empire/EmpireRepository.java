@@ -14,83 +14,83 @@ import javax.persistence.criteria.Root;
 
 public class EmpireRepository {
 
-    private EntityManager em = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
+    private EntityManager entityManager = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
 
     public EmpireRepository() {
 
     }
 
     public List<Empire> getEmpires() {
-        return em.createQuery("SELECT e FROM Empire e", Empire.class).getResultList();
+        return entityManager.createQuery("SELECT e FROM Empire e", Empire.class).getResultList();
     }
 
     public Empire getEmpireByID(long empireID) {
-        Empire emp = em.find(Empire.class, empireID);
-        return emp;
+        Empire empire = entityManager.find(Empire.class, empireID);
+        return empire;
     }
 
-    public void add(Empire emp) {
-        em.getTransaction().begin();
+    public void add(Empire empire) {
+        entityManager.getTransaction().begin();
 
-        for (Population p : emp.getPopulation()) {
-            em.persist(p);
+        for (Population p : empire.getPopulation()) {
+            entityManager.persist(p);
         }
-        em.persist(emp);
-        em.getTransaction().commit();
+        entityManager.persist(empire);
+        entityManager.getTransaction().commit();
     }
 
     public void remove(long empireIdx) throws Exception {
-        em.getTransaction().begin();
-        Empire emp = em.find(Empire.class, empireIdx);        
-        emp.getUser().removeEmpire(empireIdx);
-        em.remove(emp);
-        em.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        Empire empire = entityManager.find(Empire.class, empireIdx);        
+        empire.getUser().removeEmpire(empireIdx);
+        entityManager.remove(empire);
+        entityManager.getTransaction().commit();
     }
 
-    public void remove(Empire emp) {
-        em.getTransaction().begin();
-        em.remove(emp);
-        em.getTransaction().commit();
+    public void remove(Empire empire) {
+        entityManager.getTransaction().begin();
+        entityManager.remove(empire);
+        entityManager.getTransaction().commit();
     }
 
-    public void Update(Empire emp)
+    public void Update(Empire empire)
     {
-        em.getTransaction().begin();
-        em.merge(emp);
-        em.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        entityManager.merge(empire);
+        entityManager.getTransaction().commit();
     }
     
 
     
     public List<Empire> searchEmpires(Long UserID,String name, String description, Stock minimalwh, Building building )
     {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery(Empire.class);
-        Root rt = cq.from(Empire.class);
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Empire.class);
+        Root root = criteriaQuery.from(Empire.class);
         List<Predicate> preds = new ArrayList<>();
-        preds.add(cb.equal(rt.get("user"), UserID));
+        preds.add(criteriaBuilder.equal(root.get("user"), UserID));
         
         if(name != null){
-        preds.add(cb.like(rt.get("name"), "%"+name+"%"));
+        preds.add(criteriaBuilder.like(root.get("name"), "%"+name+"%"));
         }
          
         if(name != null){
-        preds.add(cb.like(rt.get("description"), "%"+description+"%"));
+        preds.add(criteriaBuilder.like(root.get("description"), "%"+description+"%"));
         }
         
         if(minimalwh != null){
-        Join<Empire,Stock> stock = rt.join("warehouse");
+        Join<Empire,Stock> stock = root.join("warehouse");
         
         }
         if(building != null)
         {
-        Join<Empire, Building> bld = rt.join("buildings");
+        Join<Empire, Building> building = root.join("buildings");
         }
-        cq.select(rt);              
+        criteriaQuery.select(root);              
                   
-        cq.select(rt).where(preds.toArray(new Predicate[]{}));
+        criteriaQuery.select(root).where(preds.toArray(new Predicate[]{}));
         
-        Object result = em.createQuery(cq).getResultList();
+        Object result = entityManager.createQuery(criteriaQuery).getResultList();
         if( result  != null ){
             return (List<Empire>) result;
         }

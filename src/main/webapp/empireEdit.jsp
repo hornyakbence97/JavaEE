@@ -23,7 +23,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Asset Name</th>
+                            <th>naturalAsset Name</th>
                             <th>Description</th>
                             <th>Quantity</th>
                         </tr>
@@ -31,8 +31,8 @@
                     <tbody>
                         <c:forEach var="stock" items="${selectedEmpire.produce}">
                             <tr>                            
-                                <td>${stock.asset.name}</td>
-                                <td>${stock.asset.name}</td>
+                                <td>${stock.naturalAsset.name}</td>
+                                <td>${stock.naturalAsset.name}</td>
                                 <td>${stock.quantity}</td>                            
                             </tr>
                         </c:forEach>
@@ -43,7 +43,7 @@
                 <table  class="table">
                     <thead>
                         <tr>
-                            <th>Asset Name</th>
+                            <th>naturalAsset Name</th>
                             <th>Description</th>
                             <th>Quantity</th>
                         </tr>
@@ -51,8 +51,8 @@
                     <tbody>
                         <c:forEach var="stock" items="${selectedEmpire.warehouse}">
                             <tr>                            
-                                <td>${stock.asset.name}</td>
-                                <td>${stock.asset.name}</td>
+                                <td>${stock.naturalAsset.name}</td>
+                                <td>${stock.naturalAsset.name}</td>
                                 <td>${stock.quantity}</td>                            
                             </tr>
                         </c:forEach>

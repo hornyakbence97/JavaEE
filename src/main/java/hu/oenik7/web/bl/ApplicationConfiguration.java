@@ -17,63 +17,63 @@ public class ApplicationConfiguration {
 
     @ApplicationScoped
     @Produces
-    public UserRepository createUserRepository() {
-        UserRepository ur = new UserRepository();
+    public UserRepository getUserRepository() {
+        UserRepository userRepository = new UserRepository();
 
-        return ur;
+        return userRepository;
     }
 
     @ApplicationScoped
     @Produces
     public SpeciesRepository createSpeciesRepository() {
-        SpeciesRepository sr = new SpeciesRepository();
+        SpeciesRepository speciesRepository = new SpeciesRepository();
 
-        return sr;
+        return speciesRepository;
     }
 
     @ApplicationScoped
     @Produces
     public HeroRepository createHeroRepository() {
-        HeroRepository ur = new HeroRepository();
-        return ur;
+        HeroRepository userRepository = new HeroRepository();
+        return userRepository;
     }
 
      @ApplicationScoped
     @Produces
     public PeopleRepository createPeopleRepository() {
-        PeopleRepository people = new PeopleRepository();
+        PeopleRepository peopleRepository = new PeopleRepository();
 
-        return people;
+        return peopleRepository;
     }
       
     @ApplicationScoped
     @Produces
     public NaturalAssetRepository createNaturalAssetRepository() {
-        NaturalAssetRepository nat = new NaturalAssetRepository();
-        return nat;
+        NaturalAssetRepository naturalAssetRepository = new NaturalAssetRepository();
+        return naturalAssetRepository;
     }
     
     @ApplicationScoped
     @Produces
     public EmpireRepository createEmpireRepository() {
-        EmpireRepository emp = new EmpireRepository();
-        return emp;
+        EmpireRepository empireRepository = new EmpireRepository();
+        return empireRepository;
     }
   
     
     @ApplicationScoped
     @Produces
     public StockRepository createStockRepository() {
-        StockRepository stck = new StockRepository();
-        return stck;
+        StockRepository stockRepository = new StockRepository();
+        return stockRepository;
     }
     
     @ApplicationScoped
     @Produces
     public BuildingRepository createBuildingRepository(){
-        BuildingRepository br = new BuildingRepository();
+        BuildingRepository buildingRepository = new BuildingRepository();
         
-        return br;
+        return buildingRepository;
     }
     
 }

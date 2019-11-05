@@ -78,10 +78,4 @@ public class Building {
     public void setBuildingTime(Long buildingTime) {
         this.buildingTime = buildingTime;
     }
-    
-//    public void setEmpire(Long EmpId){
-//        this.
-//    }
-
-    
 }

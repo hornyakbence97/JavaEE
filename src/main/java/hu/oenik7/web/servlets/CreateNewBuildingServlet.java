@@ -22,43 +22,27 @@ public class CreateNewBuildingServlet extends HttpServlet {
     @Inject 
     EmpireService empireService;
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
         User user = ((User)request.getSession().getAttribute("user"));
-        
-        
         String buildType = request.getParameter("buildinglist");
-        
-        
         Long e = Long.parseLong(request.getParameter("empireid"));
-        
-        
-        
-        
+
         empireService.addBuilding(e, buildType);
-        
         Empire emp = empireService.getEmpire(e);
-        
-        
-        request.setAttribute("selectedEmpire", emp);    
-        
-        
+        request.setAttribute("selectedEmpire", emp);
         getServletContext().getRequestDispatcher("/empireEdit.jsp").include(request, response);  
     }
 
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

@@ -15,7 +15,6 @@ public class NaturalAsset {
     String description;
     
     @GeneratedValue(strategy = GenerationType.AUTO)
-    
     @Id
     private long id;
 
@@ -28,7 +27,7 @@ public class NaturalAsset {
     }
     
     public NaturalAsset(){
-        
+
     }
 
     public NaturalAsset(String name, String description) {
@@ -51,5 +50,4 @@ public class NaturalAsset {
     public void setDescription(String description) {
         this.description = description;
     }
-    
 }

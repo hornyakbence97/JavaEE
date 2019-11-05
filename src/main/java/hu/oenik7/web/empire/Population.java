@@ -52,5 +52,4 @@ public class Population {
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
-    
 }

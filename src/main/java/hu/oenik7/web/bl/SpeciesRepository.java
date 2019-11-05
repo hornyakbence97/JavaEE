@@ -8,18 +8,16 @@ import javax.persistence.Persistence;
 
 public class SpeciesRepository {
 
-    private EntityManager em = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
-    //private List<Species> species = new ArrayList<>();   
+    private EntityManager entityManager = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
 
     public List<Species> getSpecies() {
-        //class-ra hivatkozunk.
-        return em.createQuery("SELECT s FROM Species s", Species.class).getResultList();
+        return entityManager.createQuery("SELECT s FROM Species s", Species.class).getResultList();
     }
 
-    public void add(Species s) {
-        em.getTransaction().begin();
-        em.persist(s);
-        em.getTransaction().commit();
+    public void add(Species spieces) {
+        entityManager.getTransaction().begin();
+        entityManager.persist(spieces);
+        entityManager.getTransaction().commit();
     }
 
 }

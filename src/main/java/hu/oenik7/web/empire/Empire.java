@@ -52,11 +52,11 @@ public class Empire {
     public Empire() {
     }
 
-    public Empire(String name, String description, Long level, User u) {
+    public Empire(String name, String description, Long level, User user) {
         this.name = name;
         this.description = description;
         this.level = level;
-        this.user = u;
+        this.user = user;
     }
 
     public Empire(String name, String description, Long level, List<Population> population, List<Stock> produce, List<Stock> warehouse, List<Building> buildings) {

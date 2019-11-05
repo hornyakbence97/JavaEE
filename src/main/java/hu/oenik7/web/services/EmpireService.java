@@ -42,53 +42,53 @@ public class EmpireService {
     }
     
     public void addBuilding(long empireID,String building){
-        Building bu = new Building();
+        Building building = new Building();
         switch(building){
             case "Barrack":
-               bu.setName(building);
-               bu.setDescription("Trains soldiers");
-               bu.setBuildingTime((long)2);
-               bu.setProduce(CreateStockRequirements(1));
+               building.setName(building);
+               building.setDescription("Trains soldiers");
+               building.setBuildingTime((long)2);
+               building.setProduce(CreateStockRequirements(1));
             break;
             case "Farm":
-               bu.setName(building);
-               bu.setDescription("produces food");
-               bu.setBuildingTime((long)2);
-               bu.setProduce(CreateStockRequirements(2));              
+               building.setName(building);
+               building.setDescription("produces food");
+               building.setBuildingTime((long)2);
+               building.setProduce(CreateStockRequirements(2));
                       
             break;
             case "Blacksmith":
-               bu.setName(building);
-               bu.setDescription("do you want a powerful ring?");
-               bu.setBuildingTime((long)2);
-               bu.setProduce(CreateStockRequirements(3));            
+               building.setName(building);
+               building.setDescription("do you want a powerful ring?");
+               building.setBuildingTime((long)2);
+               building.setProduce(CreateStockRequirements(3));
                       
             break;
             case "Mine":
-               bu.setName(building);
-               bu.setDescription("too deep");
-               bu.setBuildingTime((long)2);
-               bu.setProduce(CreateStockRequirements(4));             
+               building.setName(building);
+               building.setDescription("too deep");
+               building.setBuildingTime((long)2);
+               building.setProduce(CreateStockRequirements(4));
                       
             break;
             case "Lumberyard":
-               bu.setName(building);
-               bu.setDescription("chop-chop");
-               bu.setBuildingTime((long)2);
-               bu.setProduce(CreateStockRequirements(5));             
+               building.setName(building);
+               building.setDescription("chop-chop");
+               building.setBuildingTime((long)2);
+               building.setProduce(CreateStockRequirements(5));
                       
                break; 
                case "Townhall":
-               bu.setName(building);
-               bu.setDescription("ocsmanyiroda");
-               bu.setBuildingTime((long)2);
-               bu.setProduce(CreateStockRequirements(6));             
+               building.setName(building);
+               building.setDescription("ocsmanyiroda");
+               building.setBuildingTime((long)2);
+               building.setProduce(CreateStockRequirements(6));
                       
                break;
         }
         
         Empire emp =getEmpire(empireID);
-        emp.getBuildings().add(bu);
+        emp.getBuildings().add(building);
         empireRepository.Update(emp);
     }
      private ArrayList<Stock> CreateStockRequirements(int b){ 

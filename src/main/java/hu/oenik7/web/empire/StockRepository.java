@@ -12,24 +12,23 @@ import javax.persistence.criteria.Root;
 
 public class StockRepository {
 
-    private EntityManager em = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
+    private EntityManager entityManager = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
 
     public StockRepository() {
 
     }
 
     public List<Stock> getStocks() {
-        //class-ra hivatkozunk.
-        return em.createQuery("SELECT s FROM Stock s ORDER BY name", Stock.class).getResultList();
+        return entityManager.createQuery("SELECT s FROM Stock s ORDER BY name", Stock.class).getResultList();
     }
 
     public Stock getStock(int id) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery(Stock.class);
-        Root rt = cq.from(Stock.class);
-        cq.select(rt);
-        cq.where(cb.equal(rt.get("id"), id));
-        return (Stock) em.createQuery(cq).getSingleResult();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Stock.class);
+        Root root = criteriaQuery.from(Stock.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("id"), id));
+        return (Stock) entityManager.createQuery(criteriaQuery).getSingleResult();
     }
 
 }

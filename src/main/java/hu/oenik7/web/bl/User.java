@@ -86,8 +86,8 @@ public class User {
         this.id = id;
     }
 
-    public void addHero(Hero h) {
-        heroes.add(h);
+    public void addHero(Hero hero) {
+        heroes.add(hero);
     }
 
     public void removeHero(long heroID) throws Exception {
@@ -105,8 +105,8 @@ public class User {
         heroes.remove(idx);
     }
 
-    public void addEmpire(Empire e) {
-        empires.add(e);
+    public void addEmpire(Empire empire) {
+        empires.add(empire);
     }
 
     public void removeEmpire(long heroID) throws Exception {

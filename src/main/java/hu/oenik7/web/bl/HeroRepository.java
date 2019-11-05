@@ -8,46 +8,46 @@ import javax.persistence.Persistence;
 
 public class HeroRepository {
 
-    private EntityManager em = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
+    private EntityManager entityManager = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
 
     public List<Hero> getHeroes() {
-        return em.createQuery("SELECT h FROM Hero h", Hero.class).getResultList();
+        return entityManager.createQuery("SELECT hybrid FROM Hero hybrid", Hero.class).getResultList();
     }
 
-    public void add(Hero he) {
-        em.getTransaction().begin();
-        for (Hybrid h : he.getHybrids()) {
-            em.persist(h);
+    public void add(Hero hero) {
+        entityManager.getTransaction().begin();
+        for (Hybrid hybrid : hero.getHybrids()) {
+            entityManager.persist(hybrid);
         }
-        em.persist(he);
-        em.getTransaction().commit();
+        entityManager.persist(hero);
+        entityManager.getTransaction().commit();
     }
 
     public void remove(long heroIdx) {
-        em.getTransaction().begin();
-        Hero h = em.find(Hero.class, heroIdx);
-        em.remove(h);
-        em.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        Hero hybrid = entityManager.find(Hero.class, heroIdx);
+        entityManager.remove(hybrid);
+        entityManager.getTransaction().commit();
     }
 
     public void remove(Hero hero) {
-        em.getTransaction().begin();
-        em.remove(hero);
-        em.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        entityManager.remove(hero);
+        entityManager.getTransaction().commit();
     }
 
-    public void update(Hero he) {
-        em.getTransaction().begin();
-        for (Hybrid h : he.getHybrids()) {
-            em.merge(h);
+    public void update(Hero hero) {
+        entityManager.getTransaction().begin();
+        for (Hybrid hybrid : hero.getHybrids()) {
+            entityManager.merge(hybrid);
         }
-        em.merge(he);
-        em.getTransaction().commit();
+        entityManager.merge(hero);
+        entityManager.getTransaction().commit();
     }
 
     public Hero getHero(Long id)
     {
-        Hero he = em.find(Hero.class, id);
-        return he;
+        Hero hero = entityManager.find(Hero.class, id);
+        return hero;
     }
 }

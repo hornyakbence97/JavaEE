@@ -18,7 +18,7 @@ public class Stock {
     private long id;
 
     @ManyToOne
-    NaturalAsset asset;
+    NaturalAsset naturalAsset;
 
     Long quantity;
 
@@ -26,8 +26,8 @@ public class Stock {
 
     }
 
-    public Stock(NaturalAsset asset, Long quantity) {
-        this.asset = asset;
+    public Stock(NaturalAsset naturalAsset, Long quantity) {
+        this.naturalAsset = naturalAsset;
         this.quantity = quantity;
     }
 
@@ -40,11 +40,11 @@ public class Stock {
     }
 
     public NaturalAsset getAsset() {
-        return asset;
+        return naturalAsset;
     }
 
-    public void setAsset(NaturalAsset asset) {
-        this.asset = asset;
+    public void setAsset(NaturalAsset naturalAsset) {
+        this.naturalAsset = naturalAsset;
     }
 
     public Long getQuantity() {
@@ -54,5 +54,4 @@ public class Stock {
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
-
 }

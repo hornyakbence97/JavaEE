@@ -10,52 +10,50 @@ import javax.persistence.criteria.Root;
 
 public class UserRepository {
 
-    private EntityManager em = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
+    private EntityManager entityManager = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
 
     public List<User> getUsers() {
 
-        return em.createQuery("SELECT u FROM User u", User.class).getResultList();
+        return entityManager.createQuery("SELECT user FROM User user", User.class).getResultList();
     }
 
     public void add(User pUser) {
-        em.getTransaction().begin();
-        em.persist(pUser);
-        em.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        entityManager.persist(pUser);
+        entityManager.getTransaction().commit();
     }
     
-    public void Update(User u)
+    public void Update(User user)
     {
-        em.getTransaction().begin();
-        em.merge(u);
-        em.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        entityManager.merge(user);
+        entityManager.getTransaction().commit();
     }
     
     public User getUser(String pName, String pPassword) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery(User.class);
-        Root rt = cq.from(User.class);
-        cq.select(rt);
-        cq.where(cb.and(cb.equal(rt.get("name"), pName), cb.equal(rt.get("password"), pPassword)));
-        return (User) em.createQuery(cq).getSingleResult();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(criteriaBuilder.and(criteriaBuilder.equal(root.get("name"), pName), criteriaBuilder.equal(root.get("password"), pPassword)));
+        return (User) entityManager.createQuery(criteriaQuery).getSingleResult();
     }
 
     public User getUserByName(String pName) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery(User.class);
-        Root rt = cq.from(User.class);
-        cq.select(rt);
-        cq.where(cb.equal(rt.get("name"), pName));
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("name"), pName));
         
-        Object result = em.createQuery(cq).getSingleResult();
+        Object result = entityManager.createQuery(criteriaQuery).getSingleResult();
         if( result  != null ){
             return (User) result;
         }
         
         return null;
     }
-    
 
-    
     public UserRepository() {
 
     }

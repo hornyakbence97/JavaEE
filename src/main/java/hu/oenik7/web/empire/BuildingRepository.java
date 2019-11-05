@@ -11,39 +11,39 @@ import javax.persistence.criteria.Root;
 
 public class BuildingRepository {
 
-    private EntityManager em = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
+    private EntityManager EntityManager = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
 
     public BuildingRepository() {
     }
 
     public List<Building> getBuildings() {
 
-        return em.createQuery("SELECT s FROM Building s", Building.class).getResultList();
+        return EntityManager.createQuery("SELECT s FROM Building s", Building.class).getResultList();
     }
 
     public Building getBuilding(int id) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery(Building.class);
-        Root rt = cq.from(Building.class);
-        cq.select(rt);
-        cq.where(cb.equal(rt.get("id"), id));
-        return (Building) em.createQuery(cq).getSingleResult();
+        CriteriaBuilder criteriaBuilder = EntityManager.getCriteriaBuilder();
+        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Building.class);
+        Root root = criteriaQuery.from(Building.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("id"), id));
+        return (Building) EntityManager.createQuery(criteriaQuery).getSingleResult();
     }
 
-    public void add(Building b) {
-        em.getTransaction().begin();
-        em.persist(b);
-        em.getTransaction().commit();
+    public void add(Building building) {
+        EntityManager.getTransaction().begin();
+        EntityManager.persist(building);
+        EntityManager.getTransaction().commit();
     }
 
     public Building getBuildingByName(String name) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery(Building.class);
-        Root rt = cq.from(Building.class);
-        cq.select(rt);
-        cq.where(cb.equal(rt.get("name"), name));
+        CriteriaBuilder criteriaBuilder = EntityManager.getCriteriaBuilder();
+        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(Building.class);
+        Root root = criteriaQuery.from(Building.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("name"), name));
 
-        Object result = em.createQuery(cq).getSingleResult();
+        Object result = EntityManager.createQuery(criteriaQuery).getSingleResult();
         if (result != null) {
             return (Building) result;
         }
@@ -52,11 +52,11 @@ public class BuildingRepository {
     }
 
     public Building getBuildingByID(Long id) {
-        Building nst = em.find(Building.class, id);
-        return nst;
+        Building building = EntityManager.find(Building.class, id);
+        return building;
     }
 
     public List<Building> getOrderedBuildings() {
-        return em.createQuery("SELECT s FROM Building s order by s.name ", Building.class).getResultList();
+        return EntityManager.createQuery("SELECT s FROM Building s order by s.name ", Building.class).getResultList();
     }
 }

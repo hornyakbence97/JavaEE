@@ -11,30 +11,30 @@ import javax.persistence.criteria.Root;
 
 public class NaturalAssetRepository {
     
-    private EntityManager em = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
+    private EntityManager entityManager = Persistence.createEntityManagerFactory("heroesPU").createEntityManager();
     
     public NaturalAssetRepository() {
     }
     
     public List<NaturalAsset> getAssets() {
-        return em.createQuery("SELECT s FROM NaturalAsset s", NaturalAsset.class).getResultList();
+        return entityManager.createQuery("SELECT s FROM NaturalAsset s", NaturalAsset.class).getResultList();
     }
     
-    public void add(NaturalAsset n) {
-        em.getTransaction().begin();
-        em.persist(n);
-        em.getTransaction().commit();
+    public void add(NaturalAsset naturalAsset) {
+        entityManager.getTransaction().begin();
+        entityManager.persist(naturalAsset);
+        entityManager.getTransaction().commit();
     }
     
     public NaturalAsset getNaturalAssetByName(String name)
     {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery(NaturalAsset.class);
-        Root rt = cq.from(NaturalAsset.class);
-        cq.select(rt);
-        cq.where(cb.equal(rt.get("name"), name));
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(NaturalAsset.class);
+        Root root = criteriaQuery.from(NaturalAsset.class);
+        criteriaQuery.select(root);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("name"), name));
         
-        Object result = em.createQuery(cq).getSingleResult();
+        Object result = entityManager.createQuery(criteriaQuery).getSingleResult();
         if( result  != null ){
             return (NaturalAsset) result;
         }
@@ -44,13 +44,13 @@ public class NaturalAssetRepository {
     
     public NaturalAsset getNaturalAssetByID(Long id)
     {
-       NaturalAsset nst = em.find(NaturalAsset.class, id);
-        return nst;
+       NaturalAsset naturalAsset = entityManager.find(NaturalAsset.class, id);
+        return naturalAsset;
     }
     
     public List<NaturalAsset> getOrderedNaturalAssets()
     {
-     return em.createQuery("SELECT s FROM NaturalAsset s order by s.name " , NaturalAsset.class).getResultList();
+     return entityManager.createQuery("SELECT s FROM NaturalAsset s order by s.name " , NaturalAsset.class).getResultList();
     }
     
 }
